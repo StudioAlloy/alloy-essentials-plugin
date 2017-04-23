@@ -50,7 +50,7 @@ if(!class_exists('Alloy_Essentials'))
       add_filter( 'admin_bar_menu', array( $this, 'remove_howdy' ) );
       if( get_option('sae_clean_up_dashboard') )
       {
-      	add_action( 'wp_dashboard_setup', array( $this, 'clean_up_dashboard' ) );
+        add_action( 'wp_dashboard_setup', array( $this, 'clean_up_dashboard' ) );
       }
       if( get_option('sae_clean_admin') )
       {
@@ -320,3 +320,17 @@ if(class_exists('Alloy_Essentials'))
   $Alloy_Essentials = new Alloy_Essentials();
   $Alloy_Essentials->run();
 }
+
+function my_login_logo() { ?>
+  <style type="text/css">
+  #login h1 a, .login h1 a {
+    background-image: url('//studioalloy.nl/img/alloy-logo.svg');
+    height:95px;
+    width:320px;
+    background-size: 320px 95px;
+    background-repeat: no-repeat;
+    padding-bottom: 0;
+  }
+  </style>
+  <?php }
+  add_action( 'login_enqueue_scripts', 'my_login_logo' );
