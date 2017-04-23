@@ -7,20 +7,20 @@
 	?>
 	<h2 class="nav-tab-wrapper">
 	    <a href="?page=<?php echo $_GET['page'];?>&tab=admin_cleanup" class="nav-tab <?php echo $active_tab == 'admin_cleanup' ? 'nav-tab-active' : ''; ?>">Admin clean-up</a>
-	    <a href="?page=<?php echo $_GET['page'];?>&tab=jaap_fixes" class="nav-tab <?php echo $active_tab == 'jaap_fixes' ? 'nav-tab-active' : ''; ?>">Jaap fixes<?php echo get_option('alloy_jaap_fix_javascript_test') != '' || get_option('alloy_jaap_fix_javascript_test') != NULL ? ' <span class="settings_alert"></span>' : '';?></a>
+	    <a href="?page=<?php echo $_GET['page'];?>&tab=jaap_fixes" class="nav-tab <?php echo $active_tab == 'jaap_fixes' ? 'nav-tab-active' : ''; ?>">Jaap fixes<?php echo get_option('sae_jaap_fix_javascript_test') != '' || get_option('sae_jaap_fix_javascript_test') != NULL ? ' <span class="settings_alert"></span>' : '';?></a>
 	    <a href="?page=<?php echo $_GET['page'];?>&tab=plugins" class="nav-tab <?php echo $active_tab == 'plugins' ? 'nav-tab-active' : ''; ?>">Plugins</a>
 	</h2>
 
 	<?php switch($active_tab):
 	case 'admin_cleanup': ?>
 	<form method="post" action="options.php">
-		<?php settings_fields( 'alloy-plugin-settings-group' ); ?>
-		<?php do_settings_sections( 'alloy-plugin-settings-group' ); ?>
+		<?php settings_fields( 'sae-plugin-settings-group' ); ?>
+		<?php do_settings_sections( 'sae-plugin-settings-group' ); ?>
 		<table class="form-table">
 			<tr>
 				<th>set upload_size_limit</th>
 				<td>
-					<input type="number" min="0" max="10000000" name="alloy_upload_size_limit" value="<?php echo (esc_attr( get_option('alloy_upload_size_limit') ) == '')?'300':esc_attr( get_option('alloy_upload_size_limit', 300) ); ?>" />KB
+					<input type="number" min="0" max="10000000" name="sae_upload_size_limit" value="<?php echo (esc_attr( get_option('sae_upload_size_limit') ) == '')?'300':esc_attr( get_option('sae_upload_size_limit', 300) ); ?>" />KB
 					<p class="description" id="tagline-description">Set to 0 to turn off</p>
 				</td>
 			</tr>
@@ -32,9 +32,9 @@
 				<th>Header</th>
 				<td>
 					<fieldset>
-						<label for="alloy_clean_admin"><input type="checkbox" id="alloy_clean_admin" name="alloy_clean_admin" value="1" <?php echo checked(1, get_option('alloy_clean_admin', 1), false);?>/> Clean admin panel</label><br>
-						<?php if(!get_option('alloy_hide_all_comment_stuff')):?><label for="alloy_clean_admin_header_comments"><input type="checkbox" id="alloy_clean_admin_header_comments" name="alloy_clean_admin_header_comments" value="1" <?php echo checked(1, get_option('alloy_clean_admin_header_comments', 1), false);?>/> Hide comments</label><br><?php endif;?>
-						<label for="alloy_clean_admin_header_new_content"><input type="checkbox" id="alloy_clean_admin_header_new_content" name="alloy_clean_admin_header_new_content" value="1" <?php echo checked(1, get_option('alloy_clean_admin_header_new_content', 1), false);?>/> Hide new content</label>
+						<label for="sae_clean_admin"><input type="checkbox" id="sae_clean_admin" name="sae_clean_admin" value="1" <?php echo checked(1, get_option('sae_clean_admin', 1), false);?>/> Clean admin panel</label><br>
+						<?php if(!get_option('sae_hide_all_comment_stuff')):?><label for="sae_clean_admin_header_comments"><input type="checkbox" id="sae_clean_admin_header_comments" name="sae_clean_admin_header_comments" value="1" <?php echo checked(1, get_option('sae_clean_admin_header_comments', 1), false);?>/> Hide comments</label><br><?php endif;?>
+						<label for="sae_clean_admin_header_new_content"><input type="checkbox" id="sae_clean_admin_header_new_content" name="sae_clean_admin_header_new_content" value="1" <?php echo checked(1, get_option('sae_clean_admin_header_new_content', 1), false);?>/> Hide new content</label>
 					</fieldset>
 				</td>
 			</tr>
@@ -42,7 +42,7 @@
 				<th>Menu</th>
 				<td>
 					<fieldset>
-						<label for="sae_hide_posts"><input type="checkbox" id="sae_hide_posts" name="sae_hide_posts" value="0" <?php echo checked(0, get_option('sae_hide_posts', 0), false);?>/> Hide posts</label><br>
+						<label for="sae_hide_posts"><input type="checkbox" id="sae_hide_posts" name="sae_hide_posts" value="1" <?php echo checked(1, get_option('sae_hide_posts', 1), false);?>/> Hide posts</label><br>
 						<label for="sae_hide_links"><input type="checkbox" id="sae_hide_links" name="sae_hide_links" value="1" <?php echo checked(1, get_option('sae_hide_links', 1), false);?>/> Hide links</label><br>
 						<label for="sae_hide_tools"><input type="checkbox" id="sae_hide_tools" name="sae_hide_tools" value="1" <?php echo checked(1, get_option('sae_hide_tools', 1), false);?>/> Hide tools</label><br>
 					</fieldset>
@@ -52,10 +52,10 @@
 				<th>Posts (normal)</th>
 				<td>
 					<fieldset>
-						<label for="alloy_hide_post_format"><input type="checkbox" id="alloy_hide_post_format" name="alloy_hide_post_format" value="1" <?php echo checked(1, get_option('alloy_hide_post_format', 1), false);?>/> Hide format</label><br>
-						<label for="alloy_hide_post_categories"><input type="checkbox" id="alloy_hide_post_categories" name="alloy_hide_post_categories" value="1" <?php echo checked(1, get_option('alloy_hide_post_categories', 1), false);?>/> Hide categories</label><br>
-						<label for="alloy_hide_post_tags"><input type="checkbox" id="alloy_hide_post_tags" name="alloy_hide_post_tags" value="1" <?php echo checked(1, get_option('alloy_hide_post_tags', 1), false);?>/> Hide tags</label><br>
-						<label for="alloy_hide_post_featured_image"><input type="checkbox" id="alloy_hide_post_featured_image" name="alloy_hide_post_featured_image" value="1" <?php echo checked(1, get_option('alloy_hide_post_featured_image', 1), false);?>/> Hide featured image</label><br>
+						<label for="sae_hide_post_format"><input type="checkbox" id="sae_hide_post_format" name="sae_hide_post_format" value="1" <?php echo checked(1, get_option('sae_hide_post_format', 1), false);?>/> Hide format</label><br>
+						<label for="sae_hide_post_categories"><input type="checkbox" id="sae_hide_post_categories" name="sae_hide_post_categories" value="1" <?php echo checked(1, get_option('sae_hide_post_categories', 1), false);?>/> Hide categories</label><br>
+						<label for="sae_hide_post_tags"><input type="checkbox" id="sae_hide_post_tags" name="sae_hide_post_tags" value="1" <?php echo checked(1, get_option('sae_hide_post_tags', 1), false);?>/> Hide tags</label><br>
+						<label for="sae_hide_post_featured_image"><input type="checkbox" id="sae_hide_post_featured_image" name="sae_hide_post_featured_image" value="1" <?php echo checked(1, get_option('sae_hide_post_featured_image', 1), false);?>/> Hide featured image</label><br>
 					</fieldset>
 				</td>
 			</tr>
@@ -67,7 +67,7 @@
 				<th>Remove all comment stuff</th>
 				<td>
 					<fieldset>
-						<label for="alloy_hide_all_comment_stuff"><input type="checkbox" id="alloy_hide_all_comment_stuff" name="alloy_hide_all_comment_stuff" value="1" <?php echo checked(1, get_option('alloy_hide_all_comment_stuff', 1), false);?>/> no comment...</label><br>
+						<label for="sae_hide_all_comment_stuff"><input type="checkbox" id="sae_hide_all_comment_stuff" name="sae_hide_all_comment_stuff" value="1" <?php echo checked(1, get_option('sae_hide_all_comment_stuff', 1), false);?>/> no comment...</label><br>
 					</fieldset>
 				</td>
 			</tr>
@@ -79,7 +79,7 @@
 				<th>Cleaner dashboard</th>
 				<td>
 					<fieldset>
-						<label for="alloy_clean_up_dashboard"><input type="checkbox" id="alloy_clean_up_dashboard" name="alloy_clean_up_dashboard" value="1" <?php echo checked(1, get_option('alloy_clean_up_dashboard', 1), false);?>/> Remove some mess from the dashboard</label><br>
+						<label for="sae_clean_up_dashboard"><input type="checkbox" id="sae_clean_up_dashboard" name="sae_clean_up_dashboard" value="1" <?php echo checked(1, get_option('sae_clean_up_dashboard', 1), false);?>/> Remove some mess from the dashboard</label><br>
 					</fieldset>
 				</td>
 			</tr>
@@ -89,27 +89,27 @@
 	<?php break;?>
 	<?php case 'jaap_fixes':?>
 	<form method="post" action="options.php">
-		<?php settings_fields( 'alloy-plugin-jaap-settings-group' ); ?>
-		<?php do_settings_sections( 'alloy-plugin-jaap-settings-group' ); ?>
+		<?php settings_fields( 'sae-plugin-jaap-settings-group' ); ?>
+		<?php do_settings_sections( 'sae-plugin-jaap-settings-group' ); ?>
 		<table class="form-table">
 			<tr>
 				<th>Javascript (test)</th>
 				<td>
-					<textarea name="alloy_jaap_fix_javascript_test" id="alloy_jaap_fix_javascript_test" rows="7" cols="70"<?php echo get_option('alloy_jaap_fix_javascript_test') != '' || get_option('alloy_jaap_fix_javascript_test') != NULL ? ' style="outline:1px solid red;"' : '';?>><?php echo esc_attr( get_option('alloy_jaap_fix_javascript_test') ); ?></textarea>
+					<textarea name="sae_jaap_fix_javascript_test" id="sae_jaap_fix_javascript_test" rows="7" cols="70"<?php echo get_option('sae_jaap_fix_javascript_test') != '' || get_option('sae_jaap_fix_javascript_test') != NULL ? ' style="outline:1px solid red;"' : '';?>><?php echo esc_attr( get_option('sae_jaap_fix_javascript_test') ); ?></textarea>
 					<p class="description" id="tagline-description">This javascript is for admin only</p>
 				</td>
 			</tr>
 			<tr>
 				<th>Javascript</th>
 				<td>
-					<textarea name="alloy_jaap_fix_javascript" id="alloy_jaap_fix_javascript" rows="7" cols="70"><?php echo esc_attr( get_option('alloy_jaap_fix_javascript') ); ?></textarea>
+					<textarea name="sae_jaap_fix_javascript" id="sae_jaap_fix_javascript" rows="7" cols="70"><?php echo esc_attr( get_option('sae_jaap_fix_javascript') ); ?></textarea>
 					<p class="description" id="tagline-description">This javascript will load in the footer</p>
 				</td>
 			</tr>
 			<tr>
 				<th>You need some help?</th>
 				<td>
-					<label for="alloy_jaap_fix_need_jquery"><input type="checkbox" id="alloy_jaap_fix_need_jquery" name="alloy_jaap_fix_need_jquery" value="1" <?php echo checked(1, get_option('alloy_jaap_fix_need_jquery', 1), false);?>/> jQuery to the rescue!</label><br>
+					<label for="sae_jaap_fix_need_jquery"><input type="checkbox" id="sae_jaap_fix_need_jquery" name="sae_jaap_fix_need_jquery" value="1" <?php echo checked(1, get_option('sae_jaap_fix_need_jquery', 1), false);?>/> jQuery to the rescue!</label><br>
 				</td>
 			</tr>
 		</table>
@@ -182,7 +182,7 @@
 			<?php endforeach;?>
 		</ul>
 	<?php endforeach;?>
-
+	
 	<?php break;?>
 	<?php endswitch;?>
 </div>

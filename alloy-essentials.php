@@ -48,11 +48,11 @@ if(!class_exists('Alloy_Essentials'))
       add_action( 'admin_enqueue_scripts', array( $this, 'load_custom_wp_admin_style' ) );
       remove_action( 'admin_color_scheme_picker', 'admin_color_scheme_picker' );
       add_filter( 'admin_bar_menu', array( $this, 'remove_howdy' ) );
-      if( get_option('alloy_clean_up_dashboard') )
+      if( get_option('sae_clean_up_dashboard') )
       {
       	add_action( 'wp_dashboard_setup', array( $this, 'clean_up_dashboard' ) );
       }
-      if( get_option('alloy_clean_admin') )
+      if( get_option('sae_clean_admin') )
       {
         add_action( 'admin_bar_menu', array( $this, 'clean_up_admin_bar' ), 0 );
         add_filter( 'admin_footer_text', array( $this, 'change_admin_footer' ) );
@@ -60,7 +60,7 @@ if(!class_exists('Alloy_Essentials'))
         add_filter( 'user_contactmethods', array( $this, 'remove_contactmethods' ) );
       }
       //disable all comments
-      if( get_option('alloy_hide_all_comment_stuff') )
+      if( get_option('sae_hide_all_comment_stuff') )
       {
         add_action('admin_init', array( $this, 'disable_comments_post_types_support' ));
         add_filter('comments_open', array( $this, 'disable_comments_status' ), 20, 2);
@@ -75,7 +75,7 @@ if(!class_exists('Alloy_Essentials'))
       add_action( 'admin_menu', array( $this, 'remove_menus' ) );
       add_action( 'do_meta_boxes', array( $this, 'remove_featured_image' ) );
       //jaap fixes
-      if( get_option('alloy_jaap_fix_need_jquery') ) add_action( 'wp_head' , array( $this, 'add_jquery_script' ) );
+      if( get_option('sae_jaap_fix_need_jquery') ) add_action( 'wp_head' , array( $this, 'add_jquery_script' ) );
       add_action( 'wp_footer', array( $this, 'add_jaap_fix_javascript' ), 100 );
       add_action( 'wp_footer', array( $this, 'add_jaap_fix_javascript_test' ), 100 );
     }
@@ -85,9 +85,9 @@ if(!class_exists('Alloy_Essentials'))
     // upload size limit
     public function set_quota_upload_size()
     {
-      $alloy_upload_size_limit = esc_attr( get_option('alloy_upload_size_limit') );
-      if($alloy_upload_size_limit <= 0 || $alloy_upload_size_limit == '' || $alloy_upload_size_limit == NULL) $alloy_upload_size_limit = 33555;
-      return $alloy_upload_size_limit*1024;
+      $sae_upload_size_limit = esc_attr( get_option('sae_upload_size_limit') );
+      if($sae_upload_size_limit <= 0 || $sae_upload_size_limit == '' || $sae_upload_size_limit == NULL) $sae_upload_size_limit = 33555;
+      return $sae_upload_size_limit*1024;
     }
     // {END} upload size limit
 
@@ -119,20 +119,20 @@ if(!class_exists('Alloy_Essentials'))
 }
 
 public function load_custom_wp_admin_style() {
-  wp_register_style( 'custom_wp_admin_css', plugin_dir_url( __FILE__ ) . '/assets/css/alloy_admin_style.css', false, '1.0.0' );
+  wp_register_style( 'custom_wp_admin_css', plugin_dir_url( __FILE__ ) . '/assets/css/sae_admin_style.css', false, '1.0.0' );
   wp_enqueue_style( 'custom_wp_admin_css' );
 }
 
 public function clean_up_admin_header()
 {
   global $wp_admin_bar;
-  if(get_option('alloy_clean_admin')){
+  if(get_option('sae_clean_admin')){
     $wp_admin_bar->remove_menu('wp-logo');
     $wp_admin_bar->remove_menu('site-name');
     $wp_admin_bar->remove_menu('updates');
   }
-  if(get_option('alloy_clean_admin_header_comments') || get_option('alloy_hide_all_comment_stuff')) $wp_admin_bar->remove_menu('comments');
-  if(get_option('alloy_clean_admin_header_new_content')) $wp_admin_bar->remove_menu('new-content');
+  if(get_option('sae_clean_admin_header_comments') || get_option('sae_hide_all_comment_stuff')) $wp_admin_bar->remove_menu('comments');
+  if(get_option('sae_clean_admin_header_new_content')) $wp_admin_bar->remove_menu('new-content');
 }
 
 public function change_admin_footer() {
@@ -172,7 +172,7 @@ public function change_login_logo() { ?>
 
   public function add_jaap_fix_javascript()
   {
-    $script = get_option('alloy_jaap_fix_javascript');
+    $script = get_option('sae_jaap_fix_javascript');
     if($script != '' || $script != NULL)
     {
       echo '<script type="text/javascript">';
@@ -183,7 +183,7 @@ public function change_login_logo() { ?>
 
   public function add_jaap_fix_javascript_test()
   {
-    $script = get_option('alloy_jaap_fix_javascript_test');
+    $script = get_option('sae_jaap_fix_javascript_test');
     if(($script != '' || $script != NULL) && current_user_can( 'manage_options' ))
     {
       echo '<script type="text/javascript">';
@@ -208,18 +208,18 @@ public function change_login_logo() { ?>
     if(!current_user_can( 'manage_options' ))
     {
       remove_menu_page( 'profile.php' );
-      if(get_option('alloy_hide_posts')) remove_menu_page( 'edit.php' );
-      if(get_option('alloy_hide_links')) remove_menu_page( 'link-manager.php' );
-      if(get_option('alloy_hide_tools')) remove_menu_page( 'tools.php' );
-      if(get_option('alloy_hide_post_format')) remove_meta_box( 'formatdiv','post','normal' );
-      if(get_option('alloy_hide_post_categories')) remove_meta_box( 'categorydiv','post','normal' );
-      if(get_option('alloy_hide_post_tags')) remove_meta_box( 'tagsdiv-post_tag','post','normal' );
+      if(get_option('sae_hide_posts')) remove_menu_page( 'edit.php' );
+      if(get_option('sae_hide_links')) remove_menu_page( 'link-manager.php' );
+      if(get_option('sae_hide_tools')) remove_menu_page( 'tools.php' );
+      if(get_option('sae_hide_post_format')) remove_meta_box( 'formatdiv','post','normal' );
+      if(get_option('sae_hide_post_categories')) remove_meta_box( 'categorydiv','post','normal' );
+      if(get_option('sae_hide_post_tags')) remove_meta_box( 'tagsdiv-post_tag','post','normal' );
     }
   }
 
   public function remove_featured_image()
   {
-    if(get_option('alloy_hide_post_featured_image')) remove_meta_box( 'postimagediv','post','side' );
+    if(get_option('sae_hide_post_featured_image')) remove_meta_box( 'postimagediv','post','side' );
   }
 
   //{END} remove stuff only for other than administrators
@@ -276,12 +276,12 @@ public function change_login_logo() { ?>
   // clean up Dashboard
   public function clean_up_dashboard()
   {
-    // wp_add_dashboard_widget(
-    //   'Alloy_Essentials_widget',
-    //   'Alloy Essentials widget',
-    //   array( $this, 'dashboard_widget_function' )
-    // );
-    // add_filter('screen_options_show_screen', false);
+    wp_add_dashboard_widget(
+      'Alloy_Essentials_widget',
+      'Alloy Essentials widget',
+      array( $this, 'dashboard_widget_function' )
+    );
+    add_filter('screen_options_show_screen', false);
     remove_action( 'welcome_panel', 'wp_welcome_panel' );
     remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'normal' );
     remove_meta_box( 'dashboard_plugins', 'dashboard', 'normal' );
@@ -294,12 +294,12 @@ public function change_login_logo() { ?>
     remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
   }
 
-  // public function dashboard_widget_function()
-  // {
-  //   global $current_user;
-  //   wp_get_current_user();
-  //   include(sprintf("%s/templates/dashboard_widget.php", dirname(__FILE__)));
-  // }
+  public function dashboard_widget_function()
+  {
+    global $current_user;
+    get_currentuserinfo();
+    include(sprintf("%s/templates/dashboard_widget.php", dirname(__FILE__)));
+  }
 
   //{END} clean up Dashboard
 
