@@ -1,5 +1,5 @@
 <div class="wrap">
-	<h2><img src="http://studioalloy.nl/img/alloy-logo.svg" width="30"> Studio Alloy Essentials</h2>
+	<h2><img src="//studioalloy.nl/img/alloy-logo.svg" width="30"> Studio Alloy Essentials</h2>
 	<p>Default settings for a Studio Alloy Wordpress project</p>
 	<hr>
 	<?php
@@ -182,7 +182,7 @@
 			<?php endforeach;?>
 		</ul>
 	<?php endforeach;?>
-	
+
 	<?php break;?>
 	<?php endswitch;?>
 </div>

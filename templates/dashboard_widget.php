@@ -1,2 +1,2 @@
-<h1>Welkom terug <?php echo $current_user->user_login;?>!</h1>
-<p>Dit is het CMS van <?php echo get_bloginfo('name');?>, ontwikkeld door Studio Alloy! Heb je vragen? <a href="mailto:contact@studioalloy.nl">Laat het ons weten!</a></p>
+<h1>Hello!</h1>
+<p>This is the content management system of <?php echo get_bloginfo('name');?>, designed by Studio Alloy! Got any questions? <a href="mailto:contact@studioalloy.nl">let us know!</a></p>
