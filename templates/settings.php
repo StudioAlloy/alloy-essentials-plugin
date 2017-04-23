@@ -42,9 +42,9 @@
 				<th>Menu</th>
 				<td>
 					<fieldset>
-						<label for="alloy_hide_posts"><input type="checkbox" id="alloy_hide_posts" name="alloy_hide_posts" value="1" <?php echo checked(1, get_option('alloy_hide_posts', 1), false);?>/> Hide posts</label><br>
-						<label for="alloy_hide_links"><input type="checkbox" id="alloy_hide_links" name="alloy_hide_links" value="1" <?php echo checked(1, get_option('alloy_hide_links', 1), false);?>/> Hide links</label><br>
-						<label for="alloy_hide_tools"><input type="checkbox" id="alloy_hide_tools" name="alloy_hide_tools" value="1" <?php echo checked(1, get_option('alloy_hide_tools', 1), false);?>/> Hide tools</label><br>
+						<label for="sae_hide_posts"><input type="checkbox" id="sae_hide_posts" name="sae_hide_posts" value="0" <?php echo checked(0, get_option('sae_hide_posts', 0), false);?>/> Hide posts</label><br>
+						<label for="sae_hide_links"><input type="checkbox" id="sae_hide_links" name="sae_hide_links" value="1" <?php echo checked(1, get_option('sae_hide_links', 1), false);?>/> Hide links</label><br>
+						<label for="sae_hide_tools"><input type="checkbox" id="sae_hide_tools" name="sae_hide_tools" value="1" <?php echo checked(1, get_option('sae_hide_tools', 1), false);?>/> Hide tools</label><br>
 					</fieldset>
 				</td>
 			</tr>
@@ -182,7 +182,7 @@
 			<?php endforeach;?>
 		</ul>
 	<?php endforeach;?>
-	
+
 	<?php break;?>
 	<?php endswitch;?>
 </div>
