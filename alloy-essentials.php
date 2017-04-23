@@ -276,12 +276,12 @@ public function change_login_logo() { ?>
   // clean up Dashboard
   public function clean_up_dashboard()
   {
-    wp_add_dashboard_widget(
-      'Alloy_Essentials_widget',
-      'Alloy Essentials widget',
-      array( $this, 'dashboard_widget_function' )
-    );
-    add_filter('screen_options_show_screen', false);
+    // wp_add_dashboard_widget(
+    //   'Alloy_Essentials_widget',
+    //   'Alloy Essentials widget',
+    //   array( $this, 'dashboard_widget_function' )
+    // );
+    // add_filter('screen_options_show_screen', false);
     remove_action( 'welcome_panel', 'wp_welcome_panel' );
     remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'normal' );
     remove_meta_box( 'dashboard_plugins', 'dashboard', 'normal' );
@@ -294,12 +294,12 @@ public function change_login_logo() { ?>
     remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
   }
 
-  public function dashboard_widget_function()
-  {
-    global $current_user;
-    get_currentuserinfo();
-    include(sprintf("%s/templates/dashboard_widget.php", dirname(__FILE__)));
-  }
+  // public function dashboard_widget_function()
+  // {
+  //   global $current_user;
+  //   wp_get_current_user();
+  //   include(sprintf("%s/templates/dashboard_widget.php", dirname(__FILE__)));
+  // }
 
   //{END} clean up Dashboard
 
