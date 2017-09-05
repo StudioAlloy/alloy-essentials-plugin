@@ -7,8 +7,8 @@
 	?>
 	<h2 class="nav-tab-wrapper">
 	    <a href="?page=<?php echo $_GET['page'];?>&tab=admin_cleanup" class="nav-tab <?php echo $active_tab == 'admin_cleanup' ? 'nav-tab-active' : ''; ?>">Admin clean-up</a>
-	    <a href="?page=<?php echo $_GET['page'];?>&tab=jaap_fixes" class="nav-tab <?php echo $active_tab == 'jaap_fixes' ? 'nav-tab-active' : ''; ?>">Jaap fixes<?php echo get_option('sae_jaap_fix_javascript_test') != '' || get_option('sae_jaap_fix_javascript_test') != NULL ? ' <span class="settings_alert"></span>' : '';?></a>
-	    <a href="?page=<?php echo $_GET['page'];?>&tab=plugins" class="nav-tab <?php echo $active_tab == 'plugins' ? 'nav-tab-active' : ''; ?>">Plugins</a>
+	    <!-- <a href="?page=<?php // echo $_GET['page'];?>&tab=jaap_fixes" class="nav-tab <?php // echo $active_tab == 'jaap_fixes' ? 'nav-tab-active' : ''; ?>">Jaap fixes<?php // echo get_option('sae_jaap_fix_javascript_test') != '' || get_option('sae_jaap_fix_javascript_test') != NULL ? ' <span class="settings_alert"></span>' : '';?></a> -->
+	    <!-- <a href="?page=<?php // echo $_GET['page'];?>&tab=plugins" class="nav-tab <?php // echo $active_tab == 'plugins' ? 'nav-tab-active' : ''; ?>">Plugins</a> -->
 	</h2>
 
 	<?php switch($active_tab):
@@ -87,102 +87,102 @@
 		<?php submit_button(); ?>
 	</form>
 	<?php break;?>
-	<?php case 'jaap_fixes':?>
+	<!-- <?php // case 'jaap_fixes':?>
 	<form method="post" action="options.php">
-		<?php settings_fields( 'sae-plugin-jaap-settings-group' ); ?>
-		<?php do_settings_sections( 'sae-plugin-jaap-settings-group' ); ?>
+		<?php // settings_fields( 'sae-plugin-jaap-settings-group' ); ?>
+		<?php // do_settings_sections( 'sae-plugin-jaap-settings-group' ); ?>
 		<table class="form-table">
 			<tr>
 				<th>Javascript (test)</th>
 				<td>
-					<textarea name="sae_jaap_fix_javascript_test" id="sae_jaap_fix_javascript_test" rows="7" cols="70"<?php echo get_option('sae_jaap_fix_javascript_test') != '' || get_option('sae_jaap_fix_javascript_test') != NULL ? ' style="outline:1px solid red;"' : '';?>><?php echo esc_attr( get_option('sae_jaap_fix_javascript_test') ); ?></textarea>
+					<textarea name="sae_jaap_fix_javascript_test" id="sae_jaap_fix_javascript_test" rows="7" cols="70"<?php // echo get_option('sae_jaap_fix_javascript_test') != '' || get_option('sae_jaap_fix_javascript_test') != NULL ? ' style="outline:1px solid red;"' : '';?>><?php // echo esc_attr( get_option('sae_jaap_fix_javascript_test') ); ?></textarea>
 					<p class="description" id="tagline-description">This javascript is for admin only</p>
 				</td>
 			</tr>
 			<tr>
 				<th>Javascript</th>
 				<td>
-					<textarea name="sae_jaap_fix_javascript" id="sae_jaap_fix_javascript" rows="7" cols="70"><?php echo esc_attr( get_option('sae_jaap_fix_javascript') ); ?></textarea>
+					<textarea name="sae_jaap_fix_javascript" id="sae_jaap_fix_javascript" rows="7" cols="70"><?php // echo esc_attr( get_option('sae_jaap_fix_javascript') ); ?></textarea>
 					<p class="description" id="tagline-description">This javascript will load in the footer</p>
 				</td>
 			</tr>
 			<tr>
 				<th>You need some help?</th>
 				<td>
-					<label for="sae_jaap_fix_need_jquery"><input type="checkbox" id="sae_jaap_fix_need_jquery" name="sae_jaap_fix_need_jquery" value="1" <?php echo checked(1, get_option('sae_jaap_fix_need_jquery', 1), false);?>/> jQuery to the rescue!</label><br>
+					<label for="sae_jaap_fix_need_jquery"><input type="checkbox" id="sae_jaap_fix_need_jquery" name="sae_jaap_fix_need_jquery" value="1" <?php // echo checked(1, get_option('sae_jaap_fix_need_jquery', 1), false);?>/> jQuery to the rescue!</label><br>
 				</td>
 			</tr>
 		</table>
-		<?php submit_button(); ?>
+		<?php // submit_button(); ?>
 	</form>
-	<?php break;?>
-	<?php case 'plugins':?>
+	<?php // break;?> -->
+	<!-- <?php // case 'plugins':?>
 	<?php
-		$plugins = get_plugins();
-		$list_plugins = array(
-			"General" => array(
-				array(
-					'file' => 'contact-form-7/wp-contact-form-7.php',
-					'name' => 'Contact form 7',
-					'slug' => 'contact-form-7'
-				),
-				array(
-					'file' => 'duplicate-post/duplicate-post.php',
-					'name' => 'Duplicate Post',
-					'slug' => 'duplicate-post'
-				),
-				array(
-					'file' => 'enable-media-replace/enable-media-replace.php',
-					'name' => 'Enable Media Replace',
-					'slug' => 'enable-media-replace'
-				),
-				array(
-					'file' => 'user-role-editor/user-role-editor.php',
-					'name' => 'User Role Editor',
-					'slug' => 'user-role-editor'
-				),
-				array(
-					'file' => 'advanced-custom-fields/acf.php',
-					'name' => 'Advanced Custom Fields',
-					'slug' => 'advanced-custom-fields'
-				)
-			),
-			"Visuals" => array(
-				array(
-					'file' => 'wp-admin-ui-customize/wp-admin-ui-customize.php',
-					'name' => 'WP Admin UI Customize',
-					'slug' => 'wp-admin-ui-customize'
-				),
-				array(
-					'file' => 'js_composer/js_composer.php',
-					'name' => 'WPBakery Visual Composer',
-					'slug' => 'js_composer'
-				)
-			),
-			"SEO" => array(
-				array(
-					'file' => 'wordpress-seo/wp-seo.php',
-					'name' => 'Yoast SEO',
-					'slug' => 'wp-seo'
-				)
-			)
-		);
+		// $plugins = get_plugins();
+		// $list_plugins = array(
+		// 	"General" => array(
+		// 		array(
+		// 			'file' => 'contact-form-7/wp-contact-form-7.php',
+		// 			'name' => 'Contact form 7',
+		// 			'slug' => 'contact-form-7'
+		// 		),
+		// 		array(
+		// 			'file' => 'duplicate-post/duplicate-post.php',
+		// 			'name' => 'Duplicate Post',
+		// 			'slug' => 'duplicate-post'
+		// 		),
+		// 		array(
+		// 			'file' => 'enable-media-replace/enable-media-replace.php',
+		// 			'name' => 'Enable Media Replace',
+		// 			'slug' => 'enable-media-replace'
+		// 		),
+		// 		array(
+		// 			'file' => 'user-role-editor/user-role-editor.php',
+		// 			'name' => 'User Role Editor',
+		// 			'slug' => 'user-role-editor'
+		// 		),
+		// 		array(
+		// 			'file' => 'advanced-custom-fields/acf.php',
+		// 			'name' => 'Advanced Custom Fields',
+		// 			'slug' => 'advanced-custom-fields'
+		// 		)
+		// 	),
+		// 	"Visuals" => array(
+		// 		array(
+		// 			'file' => 'wp-admin-ui-customize/wp-admin-ui-customize.php',
+		// 			'name' => 'WP Admin UI Customize',
+		// 			'slug' => 'wp-admin-ui-customize'
+		// 		),
+		// 		array(
+		// 			'file' => 'js_composer/js_composer.php',
+		// 			'name' => 'WPBakery Visual Composer',
+		// 			'slug' => 'js_composer'
+		// 		)
+		// 	),
+		// 	"SEO" => array(
+		// 		array(
+		// 			'file' => 'wordpress-seo/wp-seo.php',
+		// 			'name' => 'Yoast SEO',
+		// 			'slug' => 'wp-seo'
+		// 		)
+		// 	)
+		// );
 	?>
-	<?php foreach($list_plugins AS $key => $value):?>
-		<h3><?php echo $key;?></h3>
+	<?php // foreach($list_plugins AS $key => $value):?>
+		<h3><?php // echo $key;?></h3>
 		<ul>
-			<?php foreach($value AS $key2 => $value2):?>
+			<?php // foreach($value AS $key2 => $value2):?>
 				<li>
-					<?php if(!array_key_exists($value2['file'], $plugins)):?>
-					<span class="noticespan red"><?php echo $value2['name'];?></span> <a href="<?php echo wp_nonce_url(add_query_arg(array('action' => 'install-plugin','plugin' => $value2['slug']),admin_url( 'update.php' )),'install-plugin_'.$value2['slug']);?>">install</a>
-					<?php else:?>
-					<span class="noticespan green"><?php echo $value2['name'];?></span> <?php echo is_plugin_active($value2['file']) ? '(Active)': '(Not active)';?>
-					<?php endif;?>
+					<?php // if(!array_key_exists($value2['file'], $plugins)):?>
+					<span class="noticespan red"><?php // echo $value2['name'];?></span> <a href="<?php // echo wp_nonce_url(add_query_arg(array('action' => 'install-plugin','plugin' => $value2['slug']),admin_url( 'update.php' )),'install-plugin_'.$value2['slug']);?>">install</a>
+					<?php // else:?>
+					<span class="noticespan green"><?php // echo $value2['name'];?></span> <?php // echo is_plugin_active($value2['file']) ? '(Active)': '(Not active)';?>
+					<?php // endif;?>
 				</li>
-			<?php endforeach;?>
+			<?php // endforeach;?>
 		</ul>
-	<?php endforeach;?>
+	<?php // endforeach;?>
 
-	<?php break;?>
+	<?php // break;?> -->
 	<?php endswitch;?>
 </div>

@@ -32,9 +32,9 @@ if(!class_exists('Alloy_Essentials_Settings'))
       if( get_option('sae_hide_post_tags') === false ) update_option('sae_hide_post_tags', 1);
       if( get_option('sae_hide_post_featured_image') === false ) update_option('sae_hide_post_featured_image', 0);
 
-      if( get_option('sae_jaap_fix_need_jquery') === false ) update_option('sae_jaap_fix_need_jquery', 0);
-      if( get_option('sae_jaap_fix_javascript_test') === false ) update_option('sae_jaap_fix_javascript_test', '');
-      if( get_option('sae_jaap_fix_javascript') === false ) update_option('sae_jaap_fix_javascript', '');
+      // if( get_option('sae_jaap_fix_need_jquery') === false ) update_option('sae_jaap_fix_need_jquery', 0);
+      // if( get_option('sae_jaap_fix_javascript_test') === false ) update_option('sae_jaap_fix_javascript_test', '');
+      // if( get_option('sae_jaap_fix_javascript') === false ) update_option('sae_jaap_fix_javascript', '');
     }
 
     public function admin_init()
@@ -62,27 +62,25 @@ if(!class_exists('Alloy_Essentials_Settings'))
       register_setting( 'sae-plugin-settings-group', 'sae_hide_post_featured_image' );
 
       // Jaap Fixes
-      register_setting( 'sae-plugin-jaap-settings-group', 'sae_jaap_fix_need_jquery' );
-      register_setting( 'sae-plugin-jaap-settings-group', 'sae_jaap_fix_javascript_test' );
-      register_setting( 'sae-plugin-jaap-settings-group', 'sae_jaap_fix_javascript' );
+      // register_setting( 'sae-plugin-jaap-settings-group', 'sae_jaap_fix_need_jquery' );
+      // register_setting( 'sae-plugin-jaap-settings-group', 'sae_jaap_fix_javascript_test' );
+      // register_setting( 'sae-plugin-jaap-settings-group', 'sae_jaap_fix_javascript' );
     }
 
     public function add_menu()
     {
-      $alert = get_option('sae_jaap_fix_javascript_test') != '' && get_option('sae_jaap_fix_javascript_test') != NULL ? '<span class="settings_alert small"></span>' : '';
+      // $alert = get_option('sae_jaap_fix_javascript_test') != '' && get_option('sae_jaap_fix_javascript_test') != NULL ? '<span class="settings_alert small"></span>' : '';
       add_options_page(
         'Studio Alloy essentials Settings',
-        'Alloy Essentials '.$alert,
+        'Alloy Essentials ',
         'manage_options',
         'Alloy_Essentials',
         array(&$this, 'plugin_settings_page')
       );
     }
 
-    public function plugin_settings_page()
-    {
-      if(!current_user_can('manage_options'))
-      {
+    public function plugin_settings_page() {
+      if(!current_user_can('manage_options')) {
         wp_die(__('You do not have sufficient permissions to access this page.'));
       }
       include(sprintf("%s/templates/settings.php", dirname(__FILE__)));
