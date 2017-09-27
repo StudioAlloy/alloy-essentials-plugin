@@ -4,7 +4,7 @@ Plugin Name: Alloy Essentials
 Plugin URI:
 Github Plugin URI: https://github.com/StudioAlloy/studio-alloy-essentials
 Description: All the essential settings for a standard Studio Alloy wordpress project
-Version: 1.0.1
+Version: 1.0.3
 Author: Studio Alloy
 Author URI: https://studioalloy.nl/
 License: GPL2
