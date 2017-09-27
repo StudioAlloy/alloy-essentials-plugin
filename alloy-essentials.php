@@ -386,38 +386,41 @@ show_admin_bar(false); // Diable admin bar fro all users
 // Include the Google Analytics Tracking Code (ga.js)
 // @ https://developers.google.com/analytics/devguides/collection/gajs/
 function alloy_custom_admin_bar(){ ?>
-  <div class="alloy-custom-admin-bar">
-    <a href="<?php echo get_dashboard_url(); ?>"><span>🖥</span> Dashboard</a>
-    <a href="<?php echo get_edit_post_link(); ?>"><span>✏️</span> Edit <?php echo is_page() ? 'page' : 'post' ; ?></a>
+  <?php if (current_user_can('edit_posts')): ?>
+    <div class="alloy-custom-admin-bar">
+      <a href="<?php echo get_dashboard_url(); ?>"><span>🖥</span> Dashboard</a>
+      <a href="<?php echo get_edit_post_link(); ?>"><span>✏️</span> Edit <?php echo is_page() ? 'page' : 'post' ; ?></a>
 
-  </div>
-  <style media="screen">
-  .alloy-custom-admin-bar {
-    position: absolute;
-    bottom: 0;
-    left: 10%;
-    background-color: #344;
-    /*box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.5);*/
-  }
-  .alloy-custom-admin-bar a {
-    color: #eee;
-    padding: 10px;
-    font-size: 14px;
-    line-height: 1em;
-    border-right: 2px solid rgba(255, 255, 255, .4);
-    display: inline-block;
-  }
-  .alloy-custom-admin-bar a:hover{
-    color: #e64;
-  }
-  .alloy-custom-admin-bar a:last-child {
-    border-right: none;
-  }
-  .alloy-custom-admin-bar a span {
-    /*font-size: 16px;*/
-    margin-right: 5px;
-  }
-  </style>
+    </div>
+    <style media="screen">
+    .alloy-custom-admin-bar {
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      background-color: #344;
+      /*box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.5);*/
+    }
+    .alloy-custom-admin-bar a {
+      color: #eee;
+      padding: 10px;
+      font-size: 14px;
+      line-height: 1em;
+      border-right: 2px solid rgba(255, 255, 255, .4);
+      display: inline-block;
+    }
+    .alloy-custom-admin-bar a:hover{
+      color: #e64;
+    }
+    .alloy-custom-admin-bar a:last-child {
+      border-right: none;
+    }
+    .alloy-custom-admin-bar a span {
+      /*font-size: 16px;*/
+      margin-right: 5px;
+    }
+    </style>
+  <?php endif; ?>
+
 <?php }
 
 // include GA tracking code before the closing head tag
