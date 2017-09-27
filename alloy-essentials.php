@@ -4,7 +4,7 @@ Plugin Name: Alloy Essentials
 Plugin URI:
 Github Plugin URI: https://github.com/StudioAlloy/studio-alloy-essentials
 Description: All the essential settings for a standard Studio Alloy wordpress project
-Version: 1.0.0
+Version: 1.0.1
 Author: Studio Alloy
 Author URI: https://studioalloy.nl/
 License: GPL2
@@ -337,45 +337,91 @@ function posp_enqueue_scripts() {
 
   // if ( is_admin() && ($pagenow == 'post.php' || $pagenow == 'post-new.php') ) {
   ?>
-    <script type="text/javascript">
-    jQuery(function(){
+  <script type="text/javascript">
+  jQuery(function(){
 
-      if(jQuery( window ).width() > 800) {
-        var posp_container = "<div class='posp_container"+(isRtl==1 ? " posp_container_rtl":"")+"'></div>";
-        var posp_status = 0;
+    if(jQuery( window ).width() > 800) {
+      var posp_container = "<div class='posp_container"+(isRtl==1 ? " posp_container_rtl":"")+"'></div>";
+      var posp_status = 0;
 
-        jQuery("body").append(posp_container);
-        jQuery("#publish").clone().removeAttr("id").appendTo(".posp_container");
+      jQuery("body").append(posp_container);
+      jQuery("#publish").clone().removeAttr("id").appendTo(".posp_container");
 
-        jQuery(window).scroll(function ()
+      jQuery(window).scroll(function ()
+      {
+        if (jQuery(window).scrollTop() >= jQuery("#submitdiv").offset().top + jQuery("#submitdiv").height() - 21)
         {
-          if (jQuery(window).scrollTop() >= jQuery("#submitdiv").offset().top + jQuery("#submitdiv").height() - 21)
+          if (posp_status == 0)
           {
-            if (posp_status == 0)
-            {
-              posp_status = 1;
-              jQuery(".posp_container").fadeIn("slow");
-              jQuery(".posp_container").css("width", (jQuery(".posp_container input").width() + 47 < 80 ? 82 : jQuery(".posp_container input").width() + 47) );
-            }
-
-          } else {
-            if (posp_status == 1)
-            {
-              posp_status = 0;
-              jQuery(".posp_container").fadeOut("slow");
-            }
+            posp_status = 1;
+            jQuery(".posp_container").fadeIn("slow");
+            jQuery(".posp_container").css("width", (jQuery(".posp_container input").width() + 47 < 80 ? 82 : jQuery(".posp_container input").width() + 47) );
           }
-        });
-      }
 
-      jQuery(".posp_container input").click(function() {
-        jQuery(this).addClass("disabled");
-        jQuery("#publish").trigger("click");
+        } else {
+          if (posp_status == 1)
+          {
+            posp_status = 0;
+            jQuery(".posp_container").fadeOut("slow");
+          }
+        }
       });
+    }
 
+    jQuery(".posp_container input").click(function() {
+      jQuery(this).addClass("disabled");
+      jQuery("#publish").trigger("click");
     });
-    </script>
+
+  });
+  </script>
   <?php
-// }
+  // }
 }
 add_action( 'admin_head', 'posp_enqueue_scripts', 20 );
+/* ------------------------------------------*/
+/* Custom admin bar hide default one
+/* ------------------------------------------*/
+show_admin_bar(false); // Diable admin bar fro all users
+// Include the Google Analytics Tracking Code (ga.js)
+// @ https://developers.google.com/analytics/devguides/collection/gajs/
+function alloy_custom_admin_bar(){ ?>
+  <div class="alloy-custom-admin-bar">
+    <a href="<?php echo get_dashboard_url(); ?>"><span>🖥</span> Dashboard</a>
+    <a href="<?php echo get_edit_post_link(); ?>"><span>✏️</span> Edit <?php echo is_page() ? 'page' : 'post' ; ?></a>
+
+  </div>
+  <style media="screen">
+  .alloy-custom-admin-bar {
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    background-color: #344;
+    /*box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.5);*/
+  }
+  .alloy-custom-admin-bar a {
+    color: #eee;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1em;
+    border-right: 2px solid rgba(255, 255, 255, .4);
+    display: inline-block;
+  }
+  .alloy-custom-admin-bar a:hover{
+    color: #e64;
+  }
+  .alloy-custom-admin-bar a:last-child {
+    border-right: none;
+  }
+  .alloy-custom-admin-bar a span {
+    /*font-size: 16px;*/
+    margin-right: 5px;
+  }
+  </style>
+<?php }
+
+// include GA tracking code before the closing head tag
+add_action('wp_footer', 'alloy_custom_admin_bar');
+
+// OR include GA tracking code before the closing body tag
+// add_action('wp_footer', 'google_analytics_tracking_code');
