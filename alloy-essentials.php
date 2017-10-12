@@ -4,7 +4,7 @@ Plugin Name: Alloy Essentials
 Plugin URI:
 Github Plugin URI: https://github.com/StudioAlloy/studio-alloy-essentials
 Description: All the essential settings for a standard Studio Alloy wordpress project
-Version: 1.0.3
+Version: 1.0.4
 Author: Studio Alloy
 Author URI: https://studioalloy.nl/
 License: GPL2
@@ -394,7 +394,7 @@ function alloy_custom_admin_bar(){ ?>
     </div>
     <style media="screen">
     .alloy-custom-admin-bar {
-      position: absolute;
+      position: fixed;
       bottom: 0;
       left: 10%;
       background-color: #344;
