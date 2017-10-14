@@ -39,6 +39,7 @@ if(!class_exists('Alloy_Essentials')) {
     public function run() {
       //Upload size limit
       add_filter('upload_size_limit', array( $this, 'set_quota_upload_size' ));
+      add_filter('analytics_id', array( $this, 'set_analytics_id' ));
       //admin clean up
       add_action( 'wp_before_admin_bar_render', array( $this, 'clean_up_admin_header' ) );
       add_action( 'admin_enqueue_scripts', array( $this, 'load_custom_wp_admin_style' ) );
@@ -82,7 +83,10 @@ if(!class_exists('Alloy_Essentials')) {
       return $sae_upload_size_limit*1024;
     }
     // {END} upload size limit
-
+    public function set_alloy_analytics_id() {
+      $alloy_analytics_id = esc_attr( get_option('alloy_analytics_id') );
+      return $alloy_analytics_id;
+    }
     //################################################################
 
     // admin clean up
@@ -265,8 +269,13 @@ public function clean_up_dashboard() {
     'Alloy Essentials widget',
     array( $this, 'dashboard_widget_function' )
   );
+  // wp_add_dashboard_widget(
+  //   'Alloy_Analytics_widget',
+  //   'Alloy Analytics widget',
+  //   array( $this, 'alloy_analytics_dashboard_widget_function' )
+  // );
   // add_filter('screen_options_show_screen', false);
-  remove_action( 'welcome_panel', 'wp_welcome_panel' );
+  // remove_action( 'welcome_panel', 'wp_welcome_panel' );
   remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'normal' );
   remove_meta_box( 'dashboard_plugins', 'dashboard', 'normal' );
   remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
@@ -275,7 +284,7 @@ public function clean_up_dashboard() {
   // remove_meta_box( 'dashboard_recent_drafts', 'dashboard', 'side' );
   remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
   remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
-  // remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
+  remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
 }
 
 public function dashboard_widget_function() {
@@ -283,6 +292,11 @@ public function dashboard_widget_function() {
   wp_get_current_user();
   include(sprintf("%s/templates/dashboard_widget.php", dirname(__FILE__)));
 }
+// public function alloy_analytics_dashboard_widget_function() {
+//   global $current_user;
+//   wp_get_current_user();
+//   include(sprintf("%s/templates/alloy_analytics_dashboard_widget.php", dirname(__FILE__)));
+// }
 
 //{END} clean up Dashboard
 
@@ -428,3 +442,77 @@ add_action('wp_footer', 'alloy_custom_admin_bar');
 
 // OR include GA tracking code before the closing body tag
 // add_action('wp_footer', 'google_analytics_tracking_code');
+
+
+//------------------------------------------------------//
+// Add analtyics to the WP dashboard with the same style of The WP welcome box (full width)
+//------------------------------------------------------//
+function alloy_analytics_dashboard_widget() {
+  // Bail if not viewing the main dashboard page
+  if ( get_current_screen()->base !== 'dashboard' ) { return; } ?>
+
+
+  <div id="alloy-analytics-widget" class="welcome-panel" style="display: none;">
+    <div class="welcome-panel-content">
+      <h2>Google Analytics</h2>
+      <p>Get a quick overview on how your site is doing</p>
+
+      <?php if( get_option('alloy_analytics_id') !== '') : ?>
+
+      <div class="alloy-analytics-container">
+        <iframe src="https://datastudio.google.com/embed/reporting/<?php echo get_option('alloy_analytics_id'); ?>" frameborder="0" style="border:0" allowfullscreen></iframe>
+      </div>
+
+    <?php else : ?>
+      <div class="alloy-error">
+        <h1>Update Google Data Studio ID. See Settings > Alloy Essentials</h1>
+      </div>
+    <?php endif; ?>
+
+  </div>
+</div>
+<style media="screen">
+#welcome-panel {
+  display: none;
+}
+.welcome-panel-content {
+  max-width: 100%;
+}
+.alloy-analytics-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 80.25%;
+  margin-bottom: 25px;
+}
+.alloy-error {
+  margin-bottom: 25px;
+  text-align: center;
+  width: 100%;
+}
+.alloy-error h1 {
+  display: block;
+  background-color: #e64;
+  line-height: 2em;
+  color: #fff;
+  padding-bottom: 10px;
+}
+.alloy-analytics-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>
+<script>
+jQuery(document).ready(function($) {
+  $('#welcome-panel').after($('#alloy-analytics-widget').show());
+});
+</script>
+<?php
+}
+add_action( 'admin_footer', 'alloy_analytics_dashboard_widget' );
+//------------------------------------------------------//
+// END Add analtyics to the WP dashboard with the same style of The WP welcome box (full width)
+//------------------------------------------------------//

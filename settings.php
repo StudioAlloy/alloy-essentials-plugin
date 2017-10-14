@@ -17,6 +17,7 @@ if(!class_exists('Alloy_Essentials_Settings'))
       update_option('timezone_string', 'Europe/Amsterdam');
       //set default settings
       if( get_option('sae_upload_size_limit') === false ) update_option('sae_upload_size_limit', 300);
+      if( get_option('alloy_analytics_id') === false ) update_option('alloy_analytics_id', '');
       if( get_option('sae_clean_admin') === false ) update_option('sae_clean_admin', 1);
       if( get_option('sae_clean_admin_header_comments') === false ) update_option('sae_clean_admin_header_comments', 1);
       if( get_option('sae_clean_admin_header_new_content') === false ) update_option('sae_clean_admin_header_new_content', 1);
@@ -42,6 +43,8 @@ if(!class_exists('Alloy_Essentials_Settings'))
       // register your plugin's settings
       // upload size limit
       register_setting( 'sae-plugin-settings-group', 'sae_upload_size_limit' );
+      // Analtyics ID
+      register_setting( 'sae-plugin-settings-group', 'alloy_analytics_id' );
       // admin
       register_setting( 'sae-plugin-settings-group', 'sae_clean_admin' );
       // admin header

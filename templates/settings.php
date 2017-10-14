@@ -26,6 +26,16 @@
 			</tr>
 		</table>
 		<hr/>
+		<table class="form-table">
+			<tr>
+				<th>set google data studio ID</th>
+				<td>
+					<input type="text" name="alloy_analytics_id" value="<?php echo (esc_attr( get_option('alloy_analytics_id') ) == '')?'':esc_attr( get_option('alloy_analytics_id', '') ); ?>" />
+					<p class="description" id="tagline-description">Leave it empty to turn it off</p>
+				</td>
+			</tr>
+		</table>
+		<hr/>
 		<h2>Admin cleanup</h2>
 		<table class="form-table">
 			<tr>
