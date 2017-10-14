@@ -42,22 +42,22 @@
 				<th>Menu</th>
 				<td>
 					<fieldset>
-						<label for="sae_hide_posts"><input type="checkbox" id="sae_hide_posts" name="sae_hide_posts" value="1" <?php echo checked(1, get_option('sae_hide_posts', 1), false);?>/> Hide posts</label><br>
+						<!-- <label for="sae_hide_posts"><input type="checkbox" id="sae_hide_posts" name="sae_hide_posts" value="1" <?php // echo checked(1, get_option('sae_hide_posts', 1), false);?>/> Hide posts</label><br> -->
 						<label for="sae_hide_links"><input type="checkbox" id="sae_hide_links" name="sae_hide_links" value="1" <?php echo checked(1, get_option('sae_hide_links', 1), false);?>/> Hide links</label><br>
 						<label for="sae_hide_tools"><input type="checkbox" id="sae_hide_tools" name="sae_hide_tools" value="1" <?php echo checked(1, get_option('sae_hide_tools', 1), false);?>/> Hide tools</label><br>
 					</fieldset>
 				</td>
 			</tr>
 			<tr>
-				<th>Posts (normal)</th>
+				<!-- <th>Posts (normal)</th>
 				<td>
 					<fieldset>
-						<label for="sae_hide_post_format"><input type="checkbox" id="sae_hide_post_format" name="sae_hide_post_format" value="1" <?php echo checked(1, get_option('sae_hide_post_format', 1), false);?>/> Hide format</label><br>
-						<label for="sae_hide_post_categories"><input type="checkbox" id="sae_hide_post_categories" name="sae_hide_post_categories" value="1" <?php echo checked(1, get_option('sae_hide_post_categories', 1), false);?>/> Hide categories</label><br>
-						<label for="sae_hide_post_tags"><input type="checkbox" id="sae_hide_post_tags" name="sae_hide_post_tags" value="1" <?php echo checked(1, get_option('sae_hide_post_tags', 1), false);?>/> Hide tags</label><br>
-						<label for="sae_hide_post_featured_image"><input type="checkbox" id="sae_hide_post_featured_image" name="sae_hide_post_featured_image" value="1" <?php echo checked(1, get_option('sae_hide_post_featured_image', 1), false);?>/> Hide featured image</label><br>
+						<label for="sae_hide_post_format"><input type="checkbox" id="sae_hide_post_format" name="sae_hide_post_format" value="0" <?php //echo checked(0, get_option('sae_hide_post_format', 0), false);?>/> Hide format</label><br>
+						<label for="sae_hide_post_categories"><input type="checkbox" id="sae_hide_post_categories" name="sae_hide_post_categories" value="0" <?php //echo checked(0, get_option('sae_hide_post_categories', 0), false);?>/> Hide categories</label><br>
+						<label for="sae_hide_post_tags"><input type="checkbox" id="sae_hide_post_tags" name="sae_hide_post_tags" value="0" <?php //echo checked(0, get_option('sae_hide_post_tags', 1), false);?>/> Hide tags</label><br>
+						<label for="sae_hide_post_featured_image"><input type="checkbox" id="sae_hide_post_featured_image" name="sae_hide_post_featured_image" value="0" <?php //echo checked(0, get_option('sae_hide_post_featured_image', 0), false);?>/> Hide featured image</label><br>
 					</fieldset>
-				</td>
+				</td> -->
 			</tr>
 		</table>
 		<hr/>

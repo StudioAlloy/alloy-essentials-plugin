@@ -23,14 +23,14 @@ if(!class_exists('Alloy_Essentials_Settings'))
       if( get_option('sae_hide_all_comment_stuff') === false ) update_option('sae_hide_all_comment_stuff', 1);
       if( get_option('sae_clean_up_dashboard') === false ) update_option('sae_clean_up_dashboard', 1);
 
-      if( get_option('sae_hide_posts') === false ) update_option('sae_hide_posts', 1);
+      // if( get_option('sae_hide_posts') === false ) update_option('sae_hide_posts', 1);
       if( get_option('sae_hide_links') === false ) update_option('sae_hide_links', 1);
       if( get_option('sae_hide_tools') === false ) update_option('sae_hide_tools', 1);
 
-      if( get_option('sae_hide_post_format') === false ) update_option('sae_hide_post_format', 1);
-      if( get_option('sae_hide_post_categories') === false ) update_option('sae_hide_post_categories', 0);
-      if( get_option('sae_hide_post_tags') === false ) update_option('sae_hide_post_tags', 1);
-      if( get_option('sae_hide_post_featured_image') === false ) update_option('sae_hide_post_featured_image', 0);
+      // if( get_option('sae_hide_post_format') === false ) update_option('sae_hide_post_format', 1);
+      // if( get_option('sae_hide_post_categories') === false ) update_option('sae_hide_post_categories', 0);
+      // if( get_option('sae_hide_post_tags') === false ) update_option('sae_hide_post_tags', 1);
+      // if( get_option('sae_hide_post_featured_image') === false ) update_option('sae_hide_post_featured_image', 0);
 
       // if( get_option('sae_jaap_fix_need_jquery') === false ) update_option('sae_jaap_fix_need_jquery', 0);
       // if( get_option('sae_jaap_fix_javascript_test') === false ) update_option('sae_jaap_fix_javascript_test', '');
