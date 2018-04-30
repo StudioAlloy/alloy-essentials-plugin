@@ -458,6 +458,7 @@ function alloy_analytics_dashboard_widget() {
       <p>Get a quick overview on how your site is doing</p>
 
       <?php if( get_option('alloy_analytics_id') !== '') : ?>
+        <a class="alloy-welcome-pull-right-button" href="https://datastudio.google.com/u/0/reporting/<?php echo get_option('alloy_analytics_id'); ?>" class="btn">View analytics  →</a>
 
       <div class="alloy-analytics-container">
         <iframe src="https://datastudio.google.com/embed/reporting/<?php echo get_option('alloy_analytics_id'); ?>" frameborder="0" style="border:0" allowfullscreen></iframe>
@@ -474,6 +475,18 @@ function alloy_analytics_dashboard_widget() {
 <style media="screen">
 #welcome-panel {
   display: none;
+}
+.alloy-welcome-pull-right-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #e64;
+  color: #fff;
+  padding: 15px;
+}
+.alloy-welcome-pull-right-button:hover {
+  background-color: #344;
+  color: #e64;
 }
 .welcome-panel-content {
   max-width: 100%;
