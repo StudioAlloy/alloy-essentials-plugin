@@ -31,7 +31,7 @@
 				<th>set google data studio ID</th>
 				<td>
 					<input type="text" name="alloy_analytics_id" value="<?php echo (esc_attr( get_option('alloy_analytics_id') ) == '')?'':esc_attr( get_option('alloy_analytics_id', '') ); ?>" />
-					<p class="description" id="tagline-description">Leave it empty to turn it off</p>
+					<p class="description" id="tagline-description">Leave it empty to turn it off (should look something like 1ew_0PQZDETWE54784_o_Yt_AMR_0/page/8viH)</p>
 				</td>
 			</tr>
 		</table>
