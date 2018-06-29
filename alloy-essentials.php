@@ -412,6 +412,7 @@ function alloy_custom_admin_bar(){ ?>
       bottom: 0;
       left: 10%;
       background-color: #344;
+      z-index: 2147483647;
       /*box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.5);*/
     }
     .alloy-custom-admin-bar a {
