@@ -6,7 +6,7 @@ Github Plugin URI: https://github.com/StudioAlloy/studio-alloy-essentials
 Github Repository: StudioAlloy/alloy-essentials-plugin
 Author URI: https://github.com/StudioAlloy
 Description: All the essential settings for a standard Studio Alloy wordpress project
-Version: 1.1.0
+Version: 1.1.1
 Author: Studio Alloy
 License: GPL2
 */
