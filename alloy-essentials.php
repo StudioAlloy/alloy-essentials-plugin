@@ -1,12 +1,13 @@
 <?php defined( 'ABSPATH' ) or die( 'Plugin file cannot be accessed directly.' );
 /*
 Plugin Name: Alloy Essentials
-Plugin URI:
+Plugin URI: https://github.com/StudioAlloy/alloy-essentials-plugin
 Github Plugin URI: https://github.com/StudioAlloy/studio-alloy-essentials
+Github Repository: StudioAlloy/alloy-essentials-plugin
+Author URI: https://github.com/StudioAlloy
 Description: All the essential settings for a standard Studio Alloy wordpress project
-Version: 1.0.8
+Version: 1.0.9
 Author: Studio Alloy
-Author URI: https://studioalloy.nl/
 License: GPL2
 */
 /*
