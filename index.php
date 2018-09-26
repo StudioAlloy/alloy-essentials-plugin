@@ -105,7 +105,7 @@ if(!class_exists('Alloy_Essentials')) {
     ));
   } else {
     $wp_admin_bar->add_menu(array('id' => 'go-to-dashboard',
-    'title' => '&#10094; &nbsp; Naar het dashboard',
+    'title' => '&#10094; &nbsp; Open dashboard',
     'href'  => get_admin_url(),
     'meta'  => array( 'class' => 'go-to-dashboard' )
   ));
