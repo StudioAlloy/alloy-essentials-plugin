@@ -99,7 +99,7 @@ if(!class_exists('Alloy_Essentials')) {
 
     if(is_admin()) {
       $wp_admin_bar->add_menu(array('id' => 'go-to-homepage',
-      'title' => '&#10094; &nbsp; Naar de website',
+      'title' => '&#10094; &nbsp; Open website',
       'href'  => get_site_url(),
       'meta'  => array( 'class' => 'go-to-homepage' )
     ));
