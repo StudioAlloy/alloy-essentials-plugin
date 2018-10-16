@@ -6,7 +6,7 @@ Github Plugin URI: https://github.com/StudioAlloy/alloy-essentials-plugin
 Github Repository: StudioAlloy/alloy-essentials-plugin
 Author URI: https://github.com/StudioAlloy
 Description: All the essential settings for a standard Studio Alloy wordpress project
-Version: 1.1.2
+Version: 1.1.3
 Author: Studio Alloy
 License: GPL2
 */
@@ -99,13 +99,13 @@ if(!class_exists('Alloy_Essentials')) {
 
     if(is_admin()) {
       $wp_admin_bar->add_menu(array('id' => 'go-to-homepage',
-      'title' => '&#10094; &nbsp; Open website',
+      'title' => '&#10094; &nbsp; Visit site',
       'href'  => get_site_url(),
       'meta'  => array( 'class' => 'go-to-homepage' )
     ));
   } else {
     $wp_admin_bar->add_menu(array('id' => 'go-to-dashboard',
-    'title' => '&#10094; &nbsp; Open dashboard',
+    'title' => '&#10094; &nbsp; Dashboard',
     'href'  => get_admin_url(),
     'meta'  => array( 'class' => 'go-to-dashboard' )
   ));
@@ -452,28 +452,20 @@ add_action('wp_footer', 'alloy_custom_admin_bar');
 function alloy_analytics_dashboard_widget() {
   // Bail if not viewing the main dashboard page
   if ( get_current_screen()->base !== 'dashboard' ) { return; } ?>
-
-
+  
+  <?php if( get_option('alloy_analytics_id') !== '') : ?>
   <div id="alloy-analytics-widget" class="welcome-panel" style="display: none;">
     <div class="welcome-panel-content">
       <h2>Google Analytics</h2>
-      <p>Get a quick overview on how your site is doing</p>
-
-      <?php if( get_option('alloy_analytics_id') !== '') : ?>
-        <a class="alloy-welcome-pull-right-button" href="https://datastudio.google.com/u/0/reporting/<?php echo get_option('alloy_analytics_id'); ?>" class="btn">View analytics  →</a>
-
+      <p>Get a quick overview on how your site is doing.</p>
+      <a class="alloy-welcome-pull-right-button" href="https://datastudio.google.com/u/0/reporting/<?php echo get_option('alloy_analytics_id'); ?>" class="btn">View analytics  →</a>
       <div class="alloy-analytics-container">
         <iframe src="https://datastudio.google.com/embed/reporting/<?php echo get_option('alloy_analytics_id'); ?>" frameborder="0" style="border:0" allowfullscreen></iframe>
       </div>
-
-    <?php else : ?>
-      <div class="alloy-error">
-        <h1>Update Google Data Studio ID. See Settings > Alloy Essentials</h1>
-      </div>
-    <?php endif; ?>
-
+    </div>
   </div>
-</div>
+  <?php endif; ?>
+
 <style media="screen">
 #welcome-panel {
   display: none;
@@ -530,4 +522,46 @@ jQuery(document).ready(function($) {
 add_action( 'admin_footer', 'alloy_analytics_dashboard_widget' );
 //------------------------------------------------------//
 // END Add analtyics to the WP dashboard with the same style of The WP welcome box (full width)
+//------------------------------------------------------//
+
+//------------------------------------------------------//
+// ACF code field names in wp_admin
+//------------------------------------------------------//
+
+function my_custom_fonts() {
+  $user = wp_get_current_user();
+  if ( in_array( 'administrator', (array) $user->roles ) ) {
+    ?> '
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+    <script>
+    new ClipboardJS('.acf-field[data-name]', {
+      text: function(trigger) {
+          return trigger.getAttribute('data-name');
+      }
+    });
+    </script>
+    <style>
+    .acf-field[data-name]:before {
+      content: attr(data-name);
+      background-color: #eee;
+      padding: 0px 3px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+      margin: 5px 0;
+      display: inline-block;
+      float: right;
+      transform: translateY(-10px);
+      font-size: 10px;
+      /* position: relative;
+      z-index: 100;
+      cursor: pointer; */
+    }
+    </style>
+    <?php
+  }
+}
+add_action('admin_head', 'my_custom_fonts');
+
+//------------------------------------------------------//
+// END ACF code field names in wp_admin
 //------------------------------------------------------//
