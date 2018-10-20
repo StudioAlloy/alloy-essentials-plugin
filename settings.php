@@ -18,6 +18,10 @@ if(!class_exists('Alloy_Essentials_Settings'))
       //set default settings
       if( get_option('sae_upload_size_limit') === false ) update_option('sae_upload_size_limit', 300);
       if( get_option('alloy_analytics_id') === false ) update_option('alloy_analytics_id', '');
+      if( get_option('alloy_analytics_page_one') === false ) update_option('alloy_analytics_page_one', '');
+      if( get_option('alloy_analytics_page_two') === false ) update_option('alloy_analytics_page_two', '');
+      if( get_option('alloy_analytics_page_three') === false ) update_option('alloy_analytics_page_three', '');
+      if( get_option('alloy_analytics_page_four') === false ) update_option('alloy_analytics_page_four', '');
       if( get_option('sae_clean_admin') === false ) update_option('sae_clean_admin', 1);
       if( get_option('sae_clean_admin_header_comments') === false ) update_option('sae_clean_admin_header_comments', 1);
       if( get_option('sae_clean_admin_header_new_content') === false ) update_option('sae_clean_admin_header_new_content', 1);
@@ -45,6 +49,10 @@ if(!class_exists('Alloy_Essentials_Settings'))
       register_setting( 'sae-plugin-settings-group', 'sae_upload_size_limit' );
       // Analtyics ID
       register_setting( 'sae-plugin-settings-group', 'alloy_analytics_id' );
+      register_setting( 'sae-plugin-settings-group', 'alloy_analytics_page_one' );
+      register_setting( 'sae-plugin-settings-group', 'alloy_analytics_page_two' );
+      register_setting( 'sae-plugin-settings-group', 'alloy_analytics_page_three' );
+      register_setting( 'sae-plugin-settings-group', 'alloy_analytics_page_four' );
       // admin
       register_setting( 'sae-plugin-settings-group', 'sae_clean_admin' );
       // admin header

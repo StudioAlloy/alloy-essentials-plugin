@@ -88,6 +88,22 @@ if(!class_exists('Alloy_Essentials')) {
       $alloy_analytics_id = esc_attr( get_option('alloy_analytics_id') );
       return $alloy_analytics_id;
     }
+    public function set_alloy_analytics_page_one() {
+      $alloy_analytics_page_one = esc_attr( get_option('alloy_analytics_page_one') );
+      return $alloy_analytics_page_one;
+    }
+    public function set_alloy_analytics_page_two() {
+      $alloy_analytics_page_two = esc_attr( get_option('alloy_analytics_page_two') );
+      return $alloy_analytics_page_two;
+    }
+    public function set_alloy_analytics_page_three() {
+      $alloy_analytics_page_three = esc_attr( get_option('alloy_analytics_page_three') );
+      return $alloy_analytics_page_three;
+    }
+    public function set_alloy_analytics_page_four() {
+      $alloy_analytics_page_four = esc_attr( get_option('alloy_analytics_page_four') );
+      return $alloy_analytics_page_four;
+    }
     //################################################################
 
     // admin clean up
@@ -265,19 +281,21 @@ public function disable_comments_admin_bar() {
 
 // clean up Dashboard
 public function clean_up_dashboard() {
-  wp_add_dashboard_widget(
-    'Alloy_Essentials_widget',
-    'Alloy Essentials widget',
-    array( $this, 'dashboard_widget_function' )
-  );
+  // wp_add_dashboard_widget(
+  //   'Alloy_Essentials_widget',
+  //   'Alloy Essentials widget',
+  //   array( $this, 'dashboard_widget_function' )
+  // );
   // wp_add_dashboard_widget(
   //   'Alloy_Analytics_widget',
   //   'Alloy Analytics widget',
   //   array( $this, 'alloy_analytics_dashboard_widget_function' )
   // );
   // add_filter('screen_options_show_screen', false);
-  // remove_action( 'welcome_panel', 'wp_welcome_panel' );
+  remove_action( 'welcome_panel', 'wp_welcome_panel' );
   remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'normal' );
+  remove_meta_box( 'wpseo-dashboard-overview', 'dashboard', 'side' );
+  remove_meta_box( 'rg_forms_dashboard', 'dashboard', 'side' );
   remove_meta_box( 'dashboard_plugins', 'dashboard', 'normal' );
   remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
   remove_meta_box( 'dashboard_secondary', 'dashboard', 'normal' );
@@ -449,77 +467,96 @@ add_action('wp_footer', 'alloy_custom_admin_bar');
 //------------------------------------------------------//
 // Add analtyics to the WP dashboard with the same style of The WP welcome box (full width)
 //------------------------------------------------------//
-function alloy_analytics_dashboard_widget() {
-  // Bail if not viewing the main dashboard page
-  if ( get_current_screen()->base !== 'dashboard' ) { return; } ?>
-  
-  <?php if( get_option('alloy_analytics_id') !== '') : ?>
-  <div id="alloy-analytics-widget" class="welcome-panel" style="display: none;">
-    <div class="welcome-panel-content">
-      <h2>Google Analytics</h2>
-      <p>Get a quick overview on how your site is doing.</p>
-      <a class="alloy-welcome-pull-right-button" href="https://datastudio.google.com/u/0/reporting/<?php echo get_option('alloy_analytics_id'); ?>" class="btn">View analytics  →</a>
-      <div class="alloy-analytics-container">
-        <iframe src="https://datastudio.google.com/embed/reporting/<?php echo get_option('alloy_analytics_id'); ?>" frameborder="0" style="border:0" allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
-  <?php endif; ?>
+function example_add_dashboard_widgets() {
 
-<style media="screen">
-#welcome-panel {
-  display: none;
+  // wp_add_dashboard_widget(
+  //   'alloy_analytics_widget_call-to-action',         // Widget slug.
+  //   'Analytics by Studio Alloy',         // Title.
+  //   'alloy_analytics_widget_cta_function' // Display function.
+  // );
+
+  wp_add_dashboard_widget(
+    'alloy_analytics_widget_page_one',         // Widget slug.
+    'Analytics by Studio Alloy',         // Title.
+    'alloy_analytics_widget_page_one_function' // Display function.
+  );
+
+  wp_add_dashboard_widget(
+    'alloy_analytics_widget_page_two',         // Widget slug.
+    'Analytics by Studio Alloy',         // Title.
+    'alloy_analytics_widget_page_two_function' // Display function.
+  );
+
+  wp_add_dashboard_widget(
+    'alloy_analytics_widget_page_three',         // Widget slug.
+    'Analytics by Studio Alloy',         // Title.
+    'alloy_analytics_widget_page_three_function' // Display function.
+  );
+  wp_add_dashboard_widget(
+    'alloy_analytics_widget_page_four',         // Widget slug.
+    'Analytics by Studio Alloy',         // Title.
+    'alloy_analytics_widget_page_four_function' // Display function.
+  );
+
+
 }
-.alloy-welcome-pull-right-button {
-  position: absolute;
-  right: 0;
-  top: 0;
-  background-color: #e64;
-  color: #fff;
-  padding: 15px;
-}
-.alloy-welcome-pull-right-button:hover {
-  background-color: #344;
-  color: #e64;
-}
-.welcome-panel-content {
-  max-width: 100%;
-}
-.alloy-analytics-container {
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 80.25%;
-  margin-bottom: 25px;
-}
-.alloy-error {
-  margin-bottom: 25px;
-  text-align: center;
-  width: 100%;
-}
-.alloy-error h1 {
-  display: block;
-  background-color: #e64;
-  line-height: 2em;
-  color: #fff;
-  padding-bottom: 10px;
-}
-.alloy-analytics-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-</style>
-<script>
-jQuery(document).ready(function($) {
-  $('#welcome-panel').after($('#alloy-analytics-widget').show());
-});
-</script>
+add_action( 'wp_dashboard_setup', 'example_add_dashboard_widgets' );
+
+function alloy_analytics_widget_page_one_function() {
+  ?>
+    <div class="alloy-analytics-container">
+      <iframe src="https://datastudio.google.com/embed/reporting/<?php echo get_option('alloy_analytics_id'); ?>/page/<?php echo get_option('alloy_analytics_page_one'); ?>" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+    <style>
+    .alloy-analytics-container {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 75.25%;
+    }
+    #alloy_analytics_widget_page_one .inside,
+    #alloy_analytics_widget_page_two .inside,
+    #alloy_analytics_widget_page_three .inside,
+    #alloy_analytics_widget_page_four .inside {
+      margin: 0;
+      padding: 0;
+    }
+    #alloy_analytics_widget_page_one iframe,
+    #alloy_analytics_widget_page_two iframe,
+    #alloy_analytics_widget_page_three iframe,
+    #alloy_analytics_widget_page_four iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    </style>
 <?php
 }
-add_action( 'admin_footer', 'alloy_analytics_dashboard_widget' );
+
+function alloy_analytics_widget_page_two_function() {
+  ?>
+    <div class="alloy-analytics-container">
+      <iframe src="https://datastudio.google.com/embed/reporting/<?php echo get_option('alloy_analytics_id'); ?>/page/<?php echo get_option('alloy_analytics_page_two'); ?>" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+<?php
+}
+
+function alloy_analytics_widget_page_three_function() {
+  ?>
+    <div class="alloy-analytics-container">
+      <iframe src="https://datastudio.google.com/embed/reporting/<?php echo get_option('alloy_analytics_id'); ?>/page/<?php echo get_option('alloy_analytics_page_three'); ?>" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+<?php
+}
+function alloy_analytics_widget_page_four_function() {
+  ?>
+    <div class="alloy-analytics-container">
+      <iframe src="https://datastudio.google.com/embed/reporting/<?php echo get_option('alloy_analytics_id'); ?>/page/<?php echo get_option('alloy_analytics_page_four'); ?>" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+<?php
+}
 //------------------------------------------------------//
 // END Add analtyics to the WP dashboard with the same style of The WP welcome box (full width)
 //------------------------------------------------------//
@@ -536,7 +573,7 @@ function my_custom_fonts() {
     <script>
     new ClipboardJS('.acf-field[data-name]', {
       text: function(trigger) {
-          return trigger.getAttribute('data-name');
+        return trigger.getAttribute('data-name');
       }
     });
     </script>
