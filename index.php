@@ -6,7 +6,7 @@ Github Plugin URI: https://github.com/StudioAlloy/alloy-essentials-plugin
 Github Repository: StudioAlloy/alloy-essentials-plugin
 Author URI: https://github.com/StudioAlloy
 Description: All the essential settings for a standard Studio Alloy wordpress project
-Version: 1.1.3
+Version: 1.1.4
 Author: Studio Alloy
 License: GPL2
 */
@@ -578,7 +578,7 @@ function my_custom_fonts() {
     });
     </script>
     <style>
-    .acf-field[data-name]:before {
+    .acf-fields .acf-field[data-name]:before {
       content: attr(data-name);
       background-color: #eee;
       padding: 0px 3px;
