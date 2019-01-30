@@ -569,16 +569,16 @@ function my_custom_fonts() {
   $user = wp_get_current_user();
   if ( in_array( 'administrator', (array) $user->roles ) ) {
     ?> '
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
     <script>
     new ClipboardJS('.acf-field[data-name]', {
       text: function(trigger) {
         return trigger.getAttribute('data-name');
       }
     });
-    </script>
+    </script> -->
     <style>
-    .acf-fields .acf-field[data-name]:before {
+    #poststuff .acf-postbox .acf-fields .acf-field[data-name]:before {
       content: attr(data-name);
       background-color: #eee;
       padding: 0px 3px;
