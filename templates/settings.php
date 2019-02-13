@@ -31,7 +31,31 @@
 				<th>set google data studio ID</th>
 				<td>
 					<input type="text" name="alloy_analytics_id" value="<?php echo (esc_attr( get_option('alloy_analytics_id') ) == '')?'':esc_attr( get_option('alloy_analytics_id', '') ); ?>" />
-					<p class="description" id="tagline-description">Leave it empty to turn it off (should look something like 1ew_0PQZDETWE54784_o_Yt_AMR_0/page/8viH)</p>
+					<p class="description" id="tagline-description">Leave it empty to turn it off (should look something like 1ew_0PQZDETWE54784_o_Yt_AMR_0)</p>
+				</td>
+			</tr>
+			<tr>
+				<th>Data studio page 1</th>
+				<td>
+					<input type="text" name="alloy_analytics_page_one" value="<?php echo (esc_attr( get_option('alloy_analytics_page_one') ) == '')?'':esc_attr( get_option('alloy_analytics_page_one', '') ); ?>" />
+				</td>
+			</tr>
+			<tr>
+				<th>Data studio page 2</th>
+				<td>
+					<input type="text" name="alloy_analytics_page_two" value="<?php echo (esc_attr( get_option('alloy_analytics_page_two') ) == '')?'':esc_attr( get_option('alloy_analytics_page_two', '') ); ?>" />
+				</td>
+			</tr>
+			<tr>
+				<th>Data studio page 3</th>
+				<td>
+					<input type="text" name="alloy_analytics_page_three" value="<?php echo (esc_attr( get_option('alloy_analytics_page_three') ) == '')?'':esc_attr( get_option('alloy_analytics_page_three', '') ); ?>" />
+				</td>
+			</tr>
+			<tr>
+				<th>Data studio page 4</th>
+				<td>
+					<input type="text" name="alloy_analytics_page_four" value="<?php echo (esc_attr( get_option('alloy_analytics_page_four') ) == '')?'':esc_attr( get_option('alloy_analytics_page_four', '') ); ?>" />
 				</td>
 			</tr>
 		</table>
