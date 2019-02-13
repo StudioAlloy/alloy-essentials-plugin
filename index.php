@@ -6,7 +6,7 @@ Github Plugin URI: https://github.com/StudioAlloy/alloy-essentials-plugin
 Github Repository: StudioAlloy/alloy-essentials-plugin
 Author URI: https://github.com/StudioAlloy
 Description: All the essential settings for a standard Studio Alloy wordpress project
-Version: 1.1.5
+Version: 1.1.6
 Author: Studio Alloy
 License: GPL2
 */
@@ -481,81 +481,90 @@ function example_add_dashboard_widgets() {
     'alloy_analytics_widget_page_one_function' // Display function.
   );
 
-  wp_add_dashboard_widget(
-    'alloy_analytics_widget_page_two',         // Widget slug.
-    'Analytics by Studio Alloy',         // Title.
-    'alloy_analytics_widget_page_two_function' // Display function.
-  );
+    add_meta_box(
+      'alloy_analytics_widget_page_two',         // Widget slug.
+      'Analytics by Studio Alloy',         // Title.
+      'alloy_analytics_widget_page_two_function', // Display function.
+      'dashboard',
+      'side',
+      'high'
+    );
 
-  wp_add_dashboard_widget(
-    'alloy_analytics_widget_page_three',         // Widget slug.
-    'Analytics by Studio Alloy',         // Title.
-    'alloy_analytics_widget_page_three_function' // Display function.
-  );
-  wp_add_dashboard_widget(
-    'alloy_analytics_widget_page_four',         // Widget slug.
-    'Analytics by Studio Alloy',         // Title.
-    'alloy_analytics_widget_page_four_function' // Display function.
-  );
+    add_meta_box(
+      'alloy_analytics_widget_page_three',         // Widget slug.
+      'Analytics by Studio Alloy',         // Title.
+      'alloy_analytics_widget_page_three_function', // Display function.
+      'dashboard',
+      'side',
+      'high'
+    );
 
-
+    add_meta_box(
+      'alloy_analytics_widget_page_four',         // Widget slug.
+      'Analytics by Studio Alloy',         // Title.
+      'alloy_analytics_widget_page_four_function', // Display function.
+      'dashboard',
+      'advanced',
+      'high'
+    );
 }
 add_action( 'wp_dashboard_setup', 'example_add_dashboard_widgets' );
 
 function alloy_analytics_widget_page_one_function() {
   ?>
-    <div class="alloy-analytics-container">
-      <iframe src="https://datastudio.google.com/embed/reporting/<?php echo get_option('alloy_analytics_id'); ?>/page/<?php echo get_option('alloy_analytics_page_one'); ?>" frameborder="0" style="border:0" allowfullscreen></iframe>
-    </div>
-    <style>
-    .alloy-analytics-container {
-      position: relative;
-      width: 100%;
-      height: 0;
-      padding-bottom: 75.25%;
-    }
-    #alloy_analytics_widget_page_one .inside,
-    #alloy_analytics_widget_page_two .inside,
-    #alloy_analytics_widget_page_three .inside,
-    #alloy_analytics_widget_page_four .inside {
-      margin: 0;
-      padding: 0;
-    }
-    #alloy_analytics_widget_page_one iframe,
-    #alloy_analytics_widget_page_two iframe,
-    #alloy_analytics_widget_page_three iframe,
-    #alloy_analytics_widget_page_four iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-    </style>
-<?php
+  <div class="alloy-analytics-container">
+    <iframe src="https://datastudio.google.com/embed/reporting/<?php echo get_option('alloy_analytics_id'); ?>/page/<?php echo get_option('alloy_analytics_page_one') ? get_option('alloy_analytics_page_one') : 'z9fa'; ?>" frameborder="0" style="border:0" allowfullscreen></iframe>
+  </div>
+  <style>
+  .alloy-analytics-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 75.25%;
+  }
+  #alloy_analytics_widget_page_one .inside,
+  #alloy_analytics_widget_page_two .inside,
+  #alloy_analytics_widget_page_three .inside,
+  #alloy_analytics_widget_page_four .inside {
+    margin: 0;
+    padding: 0;
+  }
+  #alloy_analytics_widget_page_one iframe,
+  #alloy_analytics_widget_page_two iframe,
+  #alloy_analytics_widget_page_three iframe,
+  #alloy_analytics_widget_page_four iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  </style>
+  <?php
 }
 
 function alloy_analytics_widget_page_two_function() {
   ?>
-    <div class="alloy-analytics-container">
-      <iframe src="https://datastudio.google.com/embed/reporting/<?php echo get_option('alloy_analytics_id'); ?>/page/<?php echo get_option('alloy_analytics_page_two'); ?>" frameborder="0" style="border:0" allowfullscreen></iframe>
-    </div>
-<?php
+  <div class="alloy-analytics-container">
+    <iframe src="https://datastudio.google.com/embed/reporting/<?php echo get_option('alloy_analytics_id'); ?>/page/<?php echo get_option('alloy_analytics_page_two') ? get_option('alloy_analytics_page_two') : 'mIga'; ?>" frameborder="0" style="border:0" allowfullscreen></iframe>
+  </div>
+  <?php
+
 }
 
 function alloy_analytics_widget_page_three_function() {
   ?>
-    <div class="alloy-analytics-container">
-      <iframe src="https://datastudio.google.com/embed/reporting/<?php echo get_option('alloy_analytics_id'); ?>/page/<?php echo get_option('alloy_analytics_page_three'); ?>" frameborder="0" style="border:0" allowfullscreen></iframe>
-    </div>
-<?php
+  <div class="alloy-analytics-container">
+    <iframe src="https://datastudio.google.com/embed/reporting/<?php echo get_option('alloy_analytics_id'); ?>/page/<?php echo get_option('alloy_analytics_page_three') ? get_option('alloy_analytics_page_three') : 'sPga'; ?>" frameborder="0" style="border:0" allowfullscreen></iframe>
+  </div>
+  <?php
 }
 function alloy_analytics_widget_page_four_function() {
   ?>
-    <div class="alloy-analytics-container">
-      <iframe src="https://datastudio.google.com/embed/reporting/<?php echo get_option('alloy_analytics_id'); ?>/page/<?php echo get_option('alloy_analytics_page_four'); ?>" frameborder="0" style="border:0" allowfullscreen></iframe>
-    </div>
-<?php
+  <div class="alloy-analytics-container">
+    <iframe src="https://datastudio.google.com/embed/reporting/<?php echo get_option('alloy_analytics_id'); ?>/page/<?php echo get_option('alloy_analytics_page_four') ? get_option('alloy_analytics_page_four') : 'pTga'; ?>" frameborder="0" style="border:0" allowfullscreen></iframe>
+  </div>
+  <?php
 }
 //------------------------------------------------------//
 // END Add analtyics to the WP dashboard with the same style of The WP welcome box (full width)
@@ -572,30 +581,30 @@ function my_custom_fonts() {
     <!-- <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
     <script>
     new ClipboardJS('.acf-field[data-name]', {
-      text: function(trigger) {
-        return trigger.getAttribute('data-name');
-      }
-    });
-    </script> -->
-    <style>
-    #poststuff .acf-postbox .acf-fields .acf-field[data-name]:before {
-      content: attr(data-name);
-      background-color: #eee;
-      padding: 0px 3px;
-      border-radius: 3px;
-      border: 1px solid #ccc;
-      margin: 5px 0;
-      display: inline-block;
-      float: right;
-      transform: translateY(-10px);
-      font-size: 10px;
-      /* position: relative;
-      z-index: 100;
-      cursor: pointer; */
-    }
-    </style>
-    <?php
+    text: function(trigger) {
+    return trigger.getAttribute('data-name');
   }
+});
+</script> -->
+<style>
+#poststuff .acf-postbox .acf-fields .acf-field[data-name]:before {
+  content: attr(data-name);
+  background-color: #eee;
+  padding: 0px 3px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  margin: 5px 0;
+  display: inline-block;
+  float: right;
+  transform: translateY(-10px);
+  font-size: 10px;
+  /* position: relative;
+  z-index: 100;
+  cursor: pointer; */
+}
+</style>
+<?php
+}
 }
 add_action('admin_head', 'my_custom_fonts');
 
